@@ -6,6 +6,7 @@ Fall 2025 E101 coding assessment
 This is the starter repo for the Elite 101 internship coding assessment. You will complete the functions in `main.py` using the book data in `library_books.py`.
 
 ## How to Use
+## example commit
 
 - Work inside `main.py` to write your functions
 - Test your code by running `main.py` locally or in Replit
