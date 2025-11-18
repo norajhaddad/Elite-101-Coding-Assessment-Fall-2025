@@ -120,6 +120,39 @@ def return_book(library_books_list, book_id):
     # If loop is finished with no match, this runs once
     print(f"No book found with ID '{book_id}'.")
     return False
+# TODO: Create a function to list all overdue books
+# A book is overdue if its due_date is before today AND it is still checked out
+def list_overdue_books(library_books_list):
+    """
+    U: need to see all books that are overdue right now.
+    C: A book is overdue if it's NOT available and its due_date is before today 
+    A: Loop through books, parse due_date strings, compare with today's date.
+    S: Collect overdue books, print them, and return the list.
+    E: Test with past, today, and future due dates.
+    """
+    today = datetime.today().date()
+    overdue_list = []
+
+    for book in library_books_list:
+        # Only care about books that are still checked out and have a due date
+        if book["available"] is False and book["due_date"] is not None:
+            try:
+                book_due = datetime.strptime(book["due_date"], "%Y-%m-%d").date()
+            except ValueError:
+                # If due_date format is bad, skip 
+                continue
+
+            if book_due < today:
+                overdue_list.append(book)
+
+    if len(overdue_list) == 0:
+        print("No overdue books.")
+    else:
+        print("Overdue Books:")
+        for book in overdue_list:
+            print(f"[{book['id']}] {book['title']} — {book['author']} (Due: {book['due_date']})")
+
+    return overdue_list
 
 # -------- Level 5 --------
 # TODO: Convert your data into a Book class with methods like checkout() and return_book()
